@@ -12,8 +12,12 @@ class Edge
     normal || inverse
   end
 
+  def includes_vertex?(vertex)
+    return true if vertex_one == vertex || vertex_two == vertex
+    false
+  end
+
   def to_s
     "#{@vertex_one} <---> #{@vertex_two}"
   end
 end
-
