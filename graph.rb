@@ -45,6 +45,18 @@ class Graph
     false
   end
 
+  def load_graph(number, graph_array)
+    number.times do
+      add_vertex(SecureRandom.hex(5).to_sym)
+    end
+    graph_array.each.with_index do |row, row_index|
+      row.each.with_index do |vertex, column_index|
+        edge = Edge.new(vertex_array[row_index], vertex_array[column_index])
+        edge_array << edge if vertex == 1 && !edge_exists?(edge)
+      end
+    end
+  end
+
   def add_vertex(vertex)
     vertex_array << vertex
   end
