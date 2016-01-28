@@ -65,10 +65,38 @@ class Graph
     edge_array << Edge.new(vertex_one, vertex_two)
   end
 
+  # NEEDED FOR TABU LIST ALGORITHM
+  def find_neighbours(vertex)
+    neighbours_array = []
+    edges_with_vertex = edge_array.select { |edge| edge.includes_vertex?(vertex) }
+    edges_with_vertex.each do |edge|
+      neighbours_array << if edge.vertex_one == vertex
+                            edge.vertex_two
+                          else
+                            edge.vertex_one
+                          end
+    end
+    neighbours_array
+  end
+
+  def number_of_edges_for_vertex(vertex)
+    edges_for_vertex(vertex).size
+  end
+
+  def neighbour_with_most_edges(neighbours)
+    count_array = neighbours.map { |neighbour| number_of_edges_for_vertex(neighbour) }
+    neighbours[count_array.index(count_array.max)]
+  end
+
+  def get_index_of_vertex(vertex)
+    vertex_array.index(vertex)
+  end
+  # END
+
   private
 
   def add_random_vertex
-    vertex = SecureRandom.hex(5).to_sym
+    vertex = SecureRandom.hex(1).to_sym
     vertex_array << vertex.to_sym unless vertex_array.include?(vertex)
   end
 
