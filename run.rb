@@ -47,4 +47,4 @@ d.load_graph(12, [[0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0],
                   [0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1],
                   [0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1],
                   [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0]])
-puts c.is_covered?([true, true, true, false, true, true, true, false, true, true, false, true])
+puts d.is_covered?([true, true, true, false, true, true, true, false, true, true, false, true])
