@@ -1,3 +1,5 @@
+# Jan Lachowicz (s9946)
+
 require 'securerandom'
 require 'set'
 require_relative 'edge'
@@ -10,18 +12,21 @@ class Graph
     @edge_array = []
   end
 
+  # GENEROWANIE LOSOWYCH WIERZCHOLKOW
   def add_vertices(count)
     while vertex_array.size != count
       add_random_vertex
     end
   end
 
+  # GENEROWANIE LOSOWYCH KRAWEDZI
   def add_edges(count)
     while edge_array.size != count
       add_random_edge
     end
   end
 
+  # WYPISANIE GRAFU
   def to_s
     output = "Vertices:\n"
     vertex_array.each { |vertex| output << "#{vertex}\n" }
@@ -30,10 +35,12 @@ class Graph
     output
   end
 
+  # ZWRACA KRAWEDZIE Z DANYM WIERZCHOLKIEM
   def edges_for_vertex(vertex)
     edge_array.select { |edge| edge.includes_vertex?(vertex) }
   end
 
+  # SPRAWDZA CZY GRAF JEST POKRYTY PRZEZ TABLICE WYNIKOWA WIERZCHOLKOW
   def is_covered?(boolean_array)
     cover_array = []
 
@@ -45,9 +52,10 @@ class Graph
     false
   end
 
+  # WCZYTYWANIE GRAFU (LICZBA WIERZCHOLKOW, TABLICA 2-WYMIAROWA SASIEDZTWA)
   def load_graph(number, graph_array)
     number.times do
-      add_vertex(SecureRandom.hex(5).to_sym)
+      add_random_vertex
     end
     graph_array.each.with_index do |row, row_index|
       row.each.with_index do |vertex, column_index|
@@ -55,14 +63,6 @@ class Graph
         edge_array << edge if vertex == 1 && !edge_exists?(edge)
       end
     end
-  end
-
-  def add_vertex(vertex)
-    vertex_array << vertex
-  end
-
-  def add_edge(vertex_one, vertex_two)
-    edge_array << Edge.new(vertex_one, vertex_two)
   end
 
   # NEEDED FOR TABU LIST ALGORITHM
